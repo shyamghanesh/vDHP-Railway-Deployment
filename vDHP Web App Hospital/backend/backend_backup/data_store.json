@@ -1,0 +1,130 @@
+{
+  "patients": {
+    "PID017": {
+      "id": "PID017",
+      "name": "Adrian Jason",
+      "age": 0,
+      "condition": "Asthma",
+      "location": {
+        "address": "T2, Sannidhi, 2nd cross Shantivana",
+        "city": "Bangalore",
+        "state": "Karnataka",
+        "zipCode": "560092",
+        "country": "India"
+      },
+      "vitals": {
+        "heartRate": 40.0,
+        "bloodPressure": "170/90",
+        "temperature": 100.0,
+        "oxygenSat": 100.0
+      },
+      "medicalHistory": [
+        "Asthma"
+      ],
+      "allergies": "s",
+      "currentMedications": "s",
+      "familyHistory": "s",
+      "emergencyContact": {
+        "name": "Adrian ",
+        "relationship": "collegue",
+        "phone": "9141143800"
+      },
+      "phone": "9141143800",
+      "email": "adrianjason.a2021@vit.edu",
+      "dateOfBirth": "2025-11-05",
+      "gender": "female",
+      "maritalStatus": "married",
+      "occupation": "SDE",
+      "insuranceProvider": "UAI",
+      "insuranceNumber": "We1234",
+      "riskLevel": "high",
+      "lastVisit": "2025-11-12",
+      "prescriptionImageDataUrl": null,
+      "createdAt": "2025-11-12T00:23:41.136848",
+      "updatedAt": "2025-11-12T00:23:41.136848"
+    },
+    "PID018": {
+      "id": "PID018",
+      "name": "Karthik s",
+      "age": 15,
+      "condition": "Stroke",
+      "location": {
+        "address": "123 Main St",
+        "city": "Bangalore",
+        "state": "Karnataka",
+        "zipCode": "10001",
+        "country": "India"
+      },
+      "vitals": {
+        "heartRate": 100.0,
+        "bloodPressure": "170/90",
+        "temperature": 100.0,
+        "oxygenSat": 98.0
+      },
+      "medicalHistory": [
+        "Stroke",
+        "High Cholesterol",
+        "Arthritis"
+      ],
+      "allergies": "s",
+      "currentMedications": "s",
+      "familyHistory": "s",
+      "emergencyContact": {
+        "name": "Adrian ",
+        "relationship": "collegue",
+        "phone": "9141143800"
+      },
+      "phone": "9141143800",
+      "email": "adrianjasonloj2002@gmail.com",
+      "dateOfBirth": "2010-06-08",
+      "gender": "female",
+      "maritalStatus": "married",
+      "occupation": "SDE",
+      "insuranceProvider": "UAI",
+      "insuranceNumber": "We1234",
+      "riskLevel": "medium",
+      "lastVisit": "2025-11-12",
+      "prescriptionImageDataUrl": null,
+      "createdAt": "2025-11-12T01:51:03.930367",
+      "updatedAt": "2025-11-12T01:51:03.930367"
+    }
+  },
+  "doctors": {
+    "e189a1f7-0c9b-41b4-83bf-f5208621b4bf": {
+      "id": "e189a1f7-0c9b-41b4-83bf-f5208621b4bf",
+      "name": "Dr. John Smith",
+      "specialty": "General Medicine",
+      "email": "dr.smith@hospital.com",
+      "phone": "555-0100",
+      "licenseNumber": null,
+      "hospital": null,
+      "createdAt": "2025-11-12T00:23:17.881103"
+    },
+    "doc1": {
+      "id": "doc1",
+      "name": "Dr. John Smith",
+      "specialty": "General Medicine",
+      "email": "dr.smith@hospital.com",
+      "phone": "555-0100",
+      "createdAt": "2025-11-12T00:23:17.881103"
+    }
+  },
+  "providers": {},
+  "appointments": {},
+  "prescriptions": {
+    "9da7f52a-b658-4bb7-8426-19a7919d13f6": {
+      "id": "9da7f52a-b658-4bb7-8426-19a7919d13f6",
+      "patientId": "PID018",
+      "doctorId": "doc1",
+      "medication": "ecospirin 200 mg",
+      "dosage": "1-0-1 • 3 months",
+      "instructions": "yes",
+      "startDate": null,
+      "endDate": null,
+      "refills": null,
+      "createdAt": "2025-11-12T01:53:35.598765",
+      "updatedAt": "2025-11-12T01:53:35.598765"
+    }
+  },
+  "medical_records": {}
+}
