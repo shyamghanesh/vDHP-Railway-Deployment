@@ -1,0 +1,750 @@
+{
+  "users": {
+    "columns": [
+      {
+        "name": "id",
+        "type": "VARCHAR(36)",
+        "notnull": 1,
+        "pk": 1
+      },
+      {
+        "name": "email",
+        "type": "VARCHAR(255)",
+        "notnull": 1,
+        "pk": 0
+      },
+      {
+        "name": "phone",
+        "type": "VARCHAR(20)",
+        "notnull": 0,
+        "pk": 0
+      },
+      {
+        "name": "hashed_password",
+        "type": "VARCHAR(255)",
+        "notnull": 1,
+        "pk": 0
+      },
+      {
+        "name": "is_active",
+        "type": "BOOLEAN",
+        "notnull": 0,
+        "pk": 0
+      },
+      {
+        "name": "is_verified",
+        "type": "BOOLEAN",
+        "notnull": 0,
+        "pk": 0
+      },
+      {
+        "name": "two_factor_enabled",
+        "type": "BOOLEAN",
+        "notnull": 0,
+        "pk": 0
+      },
+      {
+        "name": "two_factor_secret",
+        "type": "VARCHAR(255)",
+        "notnull": 0,
+        "pk": 0
+      },
+      {
+        "name": "biometric_enabled",
+        "type": "BOOLEAN",
+        "notnull": 0,
+        "pk": 0
+      },
+      {
+        "name": "created_at",
+        "type": "DATETIME",
+        "notnull": 0,
+        "pk": 0
+      },
+      {
+        "name": "updated_at",
+        "type": "DATETIME",
+        "notnull": 0,
+        "pk": 0
+      },
+      {
+        "name": "last_login",
+        "type": "DATETIME",
+        "notnull": 0,
+        "pk": 0
+      }
+    ],
+    "row_count": 1
+  },
+  "invitations": {
+    "columns": [
+      {
+        "name": "id",
+        "type": "VARCHAR(36)",
+        "notnull": 1,
+        "pk": 1
+      },
+      {
+        "name": "invitation_code",
+        "type": "VARCHAR(100)",
+        "notnull": 1,
+        "pk": 0
+      },
+      {
+        "name": "email",
+        "type": "VARCHAR(255)",
+        "notnull": 0,
+        "pk": 0
+      },
+      {
+        "name": "phone",
+        "type": "VARCHAR(20)",
+        "notnull": 0,
+        "pk": 0
+      },
+      {
+        "name": "hospital_id",
+        "type": "VARCHAR(36)",
+        "notnull": 1,
+        "pk": 0
+      },
+      {
+        "name": "patient_mrn",
+        "type": "VARCHAR(100)",
+        "notnull": 0,
+        "pk": 0
+      },
+      {
+        "name": "is_used",
+        "type": "BOOLEAN",
+        "notnull": 0,
+        "pk": 0
+      },
+      {
+        "name": "used_at",
+        "type": "DATETIME",
+        "notnull": 0,
+        "pk": 0
+      },
+      {
+        "name": "used_by_user_id",
+        "type": "VARCHAR(36)",
+        "notnull": 0,
+        "pk": 0
+      },
+      {
+        "name": "expires_at",
+        "type": "DATETIME",
+        "notnull": 1,
+        "pk": 0
+      },
+      {
+        "name": "created_at",
+        "type": "DATETIME",
+        "notnull": 0,
+        "pk": 0
+      },
+      {
+        "name": "invite_metadata",
+        "type": "TEXT",
+        "notnull": 0,
+        "pk": 0
+      }
+    ],
+    "row_count": 1
+  },
+  "patients": {
+    "columns": [
+      {
+        "name": "id",
+        "type": "VARCHAR(36)",
+        "notnull": 1,
+        "pk": 1
+      },
+      {
+        "name": "user_id",
+        "type": "VARCHAR(36)",
+        "notnull": 1,
+        "pk": 0
+      },
+      {
+        "name": "mrn",
+        "type": "VARCHAR(100)",
+        "notnull": 0,
+        "pk": 0
+      },
+      {
+        "name": "first_name",
+        "type": "VARCHAR(100)",
+        "notnull": 1,
+        "pk": 0
+      },
+      {
+        "name": "middle_name",
+        "type": "VARCHAR(100)",
+        "notnull": 0,
+        "pk": 0
+      },
+      {
+        "name": "last_name",
+        "type": "VARCHAR(100)",
+        "notnull": 1,
+        "pk": 0
+      },
+      {
+        "name": "date_of_birth",
+        "type": "DATE",
+        "notnull": 1,
+        "pk": 0
+      },
+      {
+        "name": "gender",
+        "type": "VARCHAR(20)",
+        "notnull": 1,
+        "pk": 0
+      },
+      {
+        "name": "address_line1",
+        "type": "VARCHAR(255)",
+        "notnull": 0,
+        "pk": 0
+      },
+      {
+        "name": "address_line2",
+        "type": "VARCHAR(255)",
+        "notnull": 0,
+        "pk": 0
+      },
+      {
+        "name": "city",
+        "type": "VARCHAR(100)",
+        "notnull": 0,
+        "pk": 0
+      },
+      {
+        "name": "state",
+        "type": "VARCHAR(100)",
+        "notnull": 0,
+        "pk": 0
+      },
+      {
+        "name": "postal_code",
+        "type": "VARCHAR(20)",
+        "notnull": 0,
+        "pk": 0
+      },
+      {
+        "name": "country",
+        "type": "VARCHAR(100)",
+        "notnull": 0,
+        "pk": 0
+      },
+      {
+        "name": "preferred_language",
+        "type": "VARCHAR(20)",
+        "notnull": 0,
+        "pk": 0
+      },
+      {
+        "name": "emergency_contact_name",
+        "type": "VARCHAR(200)",
+        "notnull": 0,
+        "pk": 0
+      },
+      {
+        "name": "emergency_contact_relationship",
+        "type": "VARCHAR(100)",
+        "notnull": 0,
+        "pk": 0
+      },
+      {
+        "name": "emergency_contact_phone",
+        "type": "VARCHAR(20)",
+        "notnull": 0,
+        "pk": 0
+      },
+      {
+        "name": "emergency_contact_email",
+        "type": "VARCHAR(255)",
+        "notnull": 0,
+        "pk": 0
+      },
+      {
+        "name": "insurance_provider",
+        "type": "VARCHAR(200)",
+        "notnull": 0,
+        "pk": 0
+      },
+      {
+        "name": "insurance_member_id",
+        "type": "VARCHAR(100)",
+        "notnull": 0,
+        "pk": 0
+      },
+      {
+        "name": "insurance_group_number",
+        "type": "VARCHAR(100)",
+        "notnull": 0,
+        "pk": 0
+      },
+      {
+        "name": "profile_photo_url",
+        "type": "VARCHAR(500)",
+        "notnull": 0,
+        "pk": 0
+      },
+      {
+        "name": "fhir_patient_resource",
+        "type": "JSON",
+        "notnull": 0,
+        "pk": 0
+      },
+      {
+        "name": "accessibility_font_size",
+        "type": "VARCHAR(20)",
+        "notnull": 0,
+        "pk": 0
+      },
+      {
+        "name": "accessibility_high_contrast",
+        "type": "BOOLEAN",
+        "notnull": 0,
+        "pk": 0
+      },
+      {
+        "name": "accessibility_voice_guidance",
+        "type": "BOOLEAN",
+        "notnull": 0,
+        "pk": 0
+      },
+      {
+        "name": "created_at",
+        "type": "DATETIME",
+        "notnull": 0,
+        "pk": 0
+      },
+      {
+        "name": "updated_at",
+        "type": "DATETIME",
+        "notnull": 0,
+        "pk": 0
+      }
+    ],
+    "row_count": 1
+  },
+  "consents": {
+    "columns": [
+      {
+        "name": "id",
+        "type": "VARCHAR(36)",
+        "notnull": 1,
+        "pk": 1
+      },
+      {
+        "name": "patient_id",
+        "type": "VARCHAR(36)",
+        "notnull": 1,
+        "pk": 0
+      },
+      {
+        "name": "consent_type",
+        "type": "VARCHAR(100)",
+        "notnull": 1,
+        "pk": 0
+      },
+      {
+        "name": "consent_version",
+        "type": "VARCHAR(20)",
+        "notnull": 1,
+        "pk": 0
+      },
+      {
+        "name": "consent_text",
+        "type": "TEXT",
+        "notnull": 1,
+        "pk": 0
+      },
+      {
+        "name": "is_agreed",
+        "type": "BOOLEAN",
+        "notnull": 0,
+        "pk": 0
+      },
+      {
+        "name": "agreed_at",
+        "type": "DATETIME",
+        "notnull": 0,
+        "pk": 0
+      },
+      {
+        "name": "signature_data",
+        "type": "TEXT",
+        "notnull": 0,
+        "pk": 0
+      },
+      {
+        "name": "is_revoked",
+        "type": "BOOLEAN",
+        "notnull": 0,
+        "pk": 0
+      },
+      {
+        "name": "revoked_at",
+        "type": "DATETIME",
+        "notnull": 0,
+        "pk": 0
+      },
+      {
+        "name": "fhir_consent_resource",
+        "type": "JSON",
+        "notnull": 0,
+        "pk": 0
+      },
+      {
+        "name": "created_at",
+        "type": "DATETIME",
+        "notnull": 0,
+        "pk": 0
+      },
+      {
+        "name": "updated_at",
+        "type": "DATETIME",
+        "notnull": 0,
+        "pk": 0
+      }
+    ],
+    "row_count": 0
+  },
+  "medical_history": {
+    "columns": [
+      {
+        "name": "id",
+        "type": "VARCHAR(36)",
+        "notnull": 1,
+        "pk": 1
+      },
+      {
+        "name": "patient_id",
+        "type": "VARCHAR(36)",
+        "notnull": 1,
+        "pk": 0
+      },
+      {
+        "name": "allergies",
+        "type": "JSON",
+        "notnull": 0,
+        "pk": 0
+      },
+      {
+        "name": "current_medications",
+        "type": "JSON",
+        "notnull": 0,
+        "pk": 0
+      },
+      {
+        "name": "chronic_conditions",
+        "type": "JSON",
+        "notnull": 0,
+        "pk": 0
+      },
+      {
+        "name": "past_surgeries",
+        "type": "JSON",
+        "notnull": 0,
+        "pk": 0
+      },
+      {
+        "name": "family_history",
+        "type": "JSON",
+        "notnull": 0,
+        "pk": 0
+      },
+      {
+        "name": "immunizations",
+        "type": "JSON",
+        "notnull": 0,
+        "pk": 0
+      },
+      {
+        "name": "created_at",
+        "type": "DATETIME",
+        "notnull": 0,
+        "pk": 0
+      },
+      {
+        "name": "updated_at",
+        "type": "DATETIME",
+        "notnull": 0,
+        "pk": 0
+      }
+    ],
+    "row_count": 0
+  },
+  "care_plans": {
+    "columns": [
+      {
+        "name": "id",
+        "type": "VARCHAR(36)",
+        "notnull": 1,
+        "pk": 1
+      },
+      {
+        "name": "patient_id",
+        "type": "VARCHAR(36)",
+        "notnull": 1,
+        "pk": 0
+      },
+      {
+        "name": "title",
+        "type": "VARCHAR(255)",
+        "notnull": 1,
+        "pk": 0
+      },
+      {
+        "name": "description",
+        "type": "TEXT",
+        "notnull": 0,
+        "pk": 0
+      },
+      {
+        "name": "status",
+        "type": "VARCHAR(50)",
+        "notnull": 1,
+        "pk": 0
+      },
+      {
+        "name": "start_date",
+        "type": "DATETIME",
+        "notnull": 1,
+        "pk": 0
+      },
+      {
+        "name": "end_date",
+        "type": "DATETIME",
+        "notnull": 0,
+        "pk": 0
+      },
+      {
+        "name": "created_by",
+        "type": "VARCHAR(200)",
+        "notnull": 0,
+        "pk": 0
+      },
+      {
+        "name": "fhir_care_plan_resource",
+        "type": "JSON",
+        "notnull": 0,
+        "pk": 0
+      },
+      {
+        "name": "created_at",
+        "type": "DATETIME",
+        "notnull": 0,
+        "pk": 0
+      },
+      {
+        "name": "updated_at",
+        "type": "DATETIME",
+        "notnull": 0,
+        "pk": 0
+      }
+    ],
+    "row_count": 1
+  },
+  "messages": {
+    "columns": [
+      {
+        "name": "id",
+        "type": "VARCHAR(36)",
+        "notnull": 1,
+        "pk": 1
+      },
+      {
+        "name": "patient_id",
+        "type": "VARCHAR(36)",
+        "notnull": 1,
+        "pk": 0
+      },
+      {
+        "name": "sender_type",
+        "type": "VARCHAR(50)",
+        "notnull": 1,
+        "pk": 0
+      },
+      {
+        "name": "sender_id",
+        "type": "VARCHAR(36)",
+        "notnull": 1,
+        "pk": 0
+      },
+      {
+        "name": "sender_name",
+        "type": "VARCHAR(200)",
+        "notnull": 1,
+        "pk": 0
+      },
+      {
+        "name": "recipient_type",
+        "type": "VARCHAR(50)",
+        "notnull": 1,
+        "pk": 0
+      },
+      {
+        "name": "recipient_id",
+        "type": "VARCHAR(36)",
+        "notnull": 1,
+        "pk": 0
+      },
+      {
+        "name": "subject",
+        "type": "VARCHAR(255)",
+        "notnull": 0,
+        "pk": 0
+      },
+      {
+        "name": "message_text",
+        "type": "TEXT",
+        "notnull": 1,
+        "pk": 0
+      },
+      {
+        "name": "message_type",
+        "type": "VARCHAR(50)",
+        "notnull": 0,
+        "pk": 0
+      },
+      {
+        "name": "attachments",
+        "type": "JSON",
+        "notnull": 0,
+        "pk": 0
+      },
+      {
+        "name": "is_read",
+        "type": "BOOLEAN",
+        "notnull": 0,
+        "pk": 0
+      },
+      {
+        "name": "read_at",
+        "type": "DATETIME",
+        "notnull": 0,
+        "pk": 0
+      },
+      {
+        "name": "fhir_communication_resource",
+        "type": "JSON",
+        "notnull": 0,
+        "pk": 0
+      },
+      {
+        "name": "created_at",
+        "type": "DATETIME",
+        "notnull": 0,
+        "pk": 0
+      },
+      {
+        "name": "updated_at",
+        "type": "DATETIME",
+        "notnull": 0,
+        "pk": 0
+      }
+    ],
+    "row_count": 2
+  },
+  "tasks": {
+    "columns": [
+      {
+        "name": "id",
+        "type": "VARCHAR(36)",
+        "notnull": 1,
+        "pk": 1
+      },
+      {
+        "name": "care_plan_id",
+        "type": "VARCHAR(36)",
+        "notnull": 0,
+        "pk": 0
+      },
+      {
+        "name": "patient_id",
+        "type": "VARCHAR(36)",
+        "notnull": 1,
+        "pk": 0
+      },
+      {
+        "name": "title",
+        "type": "VARCHAR(255)",
+        "notnull": 1,
+        "pk": 0
+      },
+      {
+        "name": "description",
+        "type": "TEXT",
+        "notnull": 0,
+        "pk": 0
+      },
+      {
+        "name": "task_type",
+        "type": "VARCHAR(100)",
+        "notnull": 1,
+        "pk": 0
+      },
+      {
+        "name": "status",
+        "type": "VARCHAR(11)",
+        "notnull": 1,
+        "pk": 0
+      },
+      {
+        "name": "priority",
+        "type": "VARCHAR(20)",
+        "notnull": 0,
+        "pk": 0
+      },
+      {
+        "name": "due_date",
+        "type": "DATETIME",
+        "notnull": 0,
+        "pk": 0
+      },
+      {
+        "name": "completed_at",
+        "type": "DATETIME",
+        "notnull": 0,
+        "pk": 0
+      },
+      {
+        "name": "questionnaire_data",
+        "type": "JSON",
+        "notnull": 0,
+        "pk": 0
+      },
+      {
+        "name": "response_data",
+        "type": "JSON",
+        "notnull": 0,
+        "pk": 0
+      },
+      {
+        "name": "fhir_task_resource",
+        "type": "JSON",
+        "notnull": 0,
+        "pk": 0
+      },
+      {
+        "name": "created_at",
+        "type": "DATETIME",
+        "notnull": 0,
+        "pk": 0
+      },
+      {
+        "name": "updated_at",
+        "type": "DATETIME",
+        "notnull": 0,
+        "pk": 0
+      }
+    ],
+    "row_count": 3
+  }
+}
