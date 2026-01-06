@@ -16,7 +16,7 @@ from backend.models import CarePlan, Task, TaskStatus, Patient
 from typing import List
 from datetime import datetime
 
-router = APIRouter(prefix="/care-plans", tags=["Care Plans"])
+router = APIRouter(tags=["Care Plans"])
 
 @router.get("", response_model=List[CarePlanResponse])
 async def get_care_plans(

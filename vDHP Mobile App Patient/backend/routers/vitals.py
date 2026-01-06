@@ -12,7 +12,7 @@ from backend.config.auth import get_current_patient
 from backend.models import Patient, Vitals, VitalsType
 from backend.schemas.vitals import VitalsCreate, VitalsResponse, VitalsListResponse
 
-router = APIRouter(prefix="/vitals", tags=["Vitals"])
+router = APIRouter(tags=["Vitals"])
 
 @router.post("", response_model=VitalsResponse, status_code=status.HTTP_201_CREATED)
 async def create_vitals(

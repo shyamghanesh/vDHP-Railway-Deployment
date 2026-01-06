@@ -1,16 +1,32 @@
+# vDHP Hospital Web App - Backend
+# Python dependencies for Railway deployment
+
+# FastAPI and Server
 fastapi==0.115.0
 uvicorn[standard]==0.30.6
-pydantic>=2.0
-numpy==2.1.1
-joblib==1.4.2
-scikit-learn==1.6.0
-pandas==2.2.3
-psycopg2-binary
-sqlalchemy==2.0.36
-python-dotenv==1.0.1
-fhir.resources==7.1.0
-passlib==1.7.4
-argon2-cffi==23.1.0
-python-jose[cryptography]==3.3.0
-python-multipart==0.0.9
 
+# Database
+sqlalchemy==2.0.36
+psycopg2-binary
+
+# Authentication (bcrypt - unified with Mobile App)
+passlib[bcrypt]==1.7.4
+bcrypt>=4.0.0
+python-jose[cryptography]==3.3.0
+
+# Validation
+pydantic>=2.0
+email-validator>=2.0.0
+
+# Utilities
+python-multipart==0.0.9
+python-dotenv==1.0.1
+
+# ML and Data Science
+numpy==2.1.1
+pandas==2.2.3
+scikit-learn==1.6.0
+joblib==1.4.2
+
+# FHIR Resources
+fhir.resources==7.1.0

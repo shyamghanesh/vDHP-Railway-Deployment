@@ -11,7 +11,7 @@ from pydantic import BaseModel
 from typing import List, Optional
 from datetime import datetime
 
-router = APIRouter(prefix="/messages", tags=["Messages"])
+router = APIRouter(tags=["Messages"])
 
 class MessageCreate(BaseModel):
     recipient_id: str

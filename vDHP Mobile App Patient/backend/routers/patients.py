@@ -17,7 +17,7 @@ from backend.schemas.patient import (
 from backend.models import Patient, Consent
 from typing import List
 
-router = APIRouter(prefix="/patients", tags=["Patients"])
+router = APIRouter(tags=["Patients"])
 
 @router.get("/me", response_model=PatientResponse)
 async def get_my_profile(

@@ -1,20 +1,27 @@
+# vDHP Care Compass - Patient Mobile App Backend
+# Python dependencies for Railway deployment
+
+# FastAPI and Server
 fastapi==0.115.0
 uvicorn[standard]==0.32.0
+
+# Database
 sqlalchemy==2.0.36
-passlib[bcrypt]==1.7.4
-python-jose[cryptography]==3.3.0
-python-multipart==0.0.12
-
-# Pydantic v2 and settings
-pydantic==2.10.3
-pydantic-settings==2.6.1
-
-# Required for EmailStr and email validation
-email-validator==2.1.1
-pydantic[email]
-
-# Database adapter
 psycopg2-binary==2.9.11
 
-# Hashing
+# Authentication
+passlib[bcrypt]==1.7.4
 bcrypt==4.2.0
+python-jose[cryptography]==3.3.0
+
+# Validation
+pydantic==2.10.3
+pydantic-settings==2.6.1
+email-validator==2.1.1
+
+# Utilities
+python-multipart==0.0.12
+python-dotenv==1.0.1
+
+# FHIR Resources (optional, for FHIR compliance)
+fhir.resources==7.1.0

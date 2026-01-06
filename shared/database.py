@@ -1,42 +1,41 @@
 """
-Database configuration and session management
-Uses shared configuration for unified database access
+Shared Database Configuration for vDHP Platform
+================================================
+This module provides unified database connection handling for both
+Mobile App Patient and Hospital Web App backends.
+
+Features:
+- PostgreSQL with SSL support for Railway deployment
+- Connection pooling for production performance
+- Automatic URL format fixing for various cloud providers
+- SQLAlchemy ORM integration
 """
 
 import os
-import sys
-from pathlib import Path
-
-# Add shared module to path
-shared_path = Path(__file__).parent.parent.parent.parent / "shared"
-if shared_path.exists():
-    sys.path.insert(0, str(shared_path))
-
-from sqlalchemy import create_engine, event, text
+from sqlalchemy import create_engine, event
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.pool import QueuePool
 
-# Load environment variables from .env if present
+# Load environment variables
 try:
     from dotenv import load_dotenv
     load_dotenv()
 except ImportError:
     pass
 
-
 def get_database_url() -> str:
     """
     Get database URL from environment with automatic format fixing.
-    Handles various cloud provider URL formats (Railway, Heroku, Render).
+    Handles various cloud provider URL formats.
     """
     database_url = os.getenv("DATABASE_URL", "")
     
     if not database_url:
-        # Default to SQLite for local development
+        # Default to SQLite for local development without DATABASE_URL
         return "sqlite:///./vdhp_care_compass.db"
     
-    # Fix for cloud providers: They may provide 'postgres://' but SQLAlchemy needs 'postgresql://'
+    # Fix for Heroku/Railway: They may provide 'postgres://' but SQLAlchemy needs 'postgresql://'
     if database_url.startswith("postgres://"):
         database_url = database_url.replace("postgres://", "postgresql://", 1)
     
@@ -55,7 +54,7 @@ IS_PRODUCTION = os.getenv("RAILWAY_ENVIRONMENT", "").lower() == "production" or 
 # Engine configuration
 engine_kwargs = {
     "pool_pre_ping": True,  # Check connection health before use
-    "echo": os.getenv("SQL_ECHO", "false").lower() == "true",
+    "echo": os.getenv("SQL_ECHO", "false").lower() == "true",  # SQL logging
 }
 
 if IS_SQLITE:
@@ -68,14 +67,14 @@ else:
         "pool_size": int(os.getenv("DB_POOL_SIZE", "5")),
         "max_overflow": int(os.getenv("DB_MAX_OVERFLOW", "10")),
         "pool_timeout": int(os.getenv("DB_POOL_TIMEOUT", "30")),
-        "pool_recycle": int(os.getenv("DB_POOL_RECYCLE", "1800")),
+        "pool_recycle": int(os.getenv("DB_POOL_RECYCLE", "1800")),  # 30 minutes
     })
     
-    # SSL configuration for Railway/Render/Heroku
-    if IS_PRODUCTION or any(x in DATABASE_URL.lower() for x in ["railway", "render", "heroku"]):
-        ssl_mode = os.getenv("DB_SSL_MODE", "require")
-        if ssl_mode != "disable":
-            engine_kwargs["connect_args"] = {"sslmode": ssl_mode}
+    # SSL configuration for Railway
+    if IS_PRODUCTION or "railway" in DATABASE_URL.lower():
+        engine_kwargs["connect_args"] = {
+            "sslmode": os.getenv("DB_SSL_MODE", "require")
+        }
 
 # Create engine
 engine = create_engine(DATABASE_URL, **engine_kwargs)
@@ -88,7 +87,10 @@ Base = declarative_base()
 
 
 def get_db():
-    """Dependency for database sessions"""
+    """
+    Dependency function for FastAPI to get database session.
+    Ensures proper session cleanup after request.
+    """
     db = SessionLocal()
     try:
         yield db
@@ -99,17 +101,31 @@ def get_db():
 def init_database():
     """
     Initialize database tables.
-    In production, Flyway migrations handle this instead.
+    In production, use Flyway migrations instead.
     """
     Base.metadata.create_all(bind=engine)
 
 
 def check_database_connection() -> bool:
-    """Check if database connection is healthy."""
+    """
+    Check if database connection is healthy.
+    Returns True if connection successful, False otherwise.
+    """
     try:
         with engine.connect() as conn:
-            conn.execute(text("SELECT 1"))
+            conn.execute("SELECT 1")
         return True
     except Exception as e:
         print(f"Database connection error: {e}")
         return False
+
+
+# Connection event listeners for debugging
+if os.getenv("DB_DEBUG", "false").lower() == "true":
+    @event.listens_for(engine, "connect")
+    def receive_connect(dbapi_connection, connection_record):
+        print(f"Database connection established: {connection_record}")
+    
+    @event.listens_for(engine, "checkout")
+    def receive_checkout(dbapi_connection, connection_record, connection_proxy):
+        print(f"Connection checked out from pool")
