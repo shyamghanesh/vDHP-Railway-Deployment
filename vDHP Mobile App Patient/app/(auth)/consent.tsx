@@ -23,8 +23,8 @@ export default function ConsentScreen() {
       const patientFhirId = await AsyncStorage.getItem('patient_fhir_id'); // The FHIR server's patient ID
       const patientName = await AsyncStorage.getItem('patient_name'); // e.g., "John Doe"
 
-      if (!patientId || !patientFhirId) {
-        // Handle error: essential patient identifiers are missing
+      if (!patientId) {
+        // Handle error: essential patient identifier is missing
         const errorMessage = 'Patient identifiers not found. Please try logging in again.';
         console.error(errorMessage);
         setError(errorMessage);
@@ -42,26 +42,29 @@ export default function ConsentScreen() {
       };
       await patientService.createConsent(localConsentPayload);
 
-      const fhirConsentPayload = {
-        resourceType: 'Consent',
-        status: 'active',
-        scope: { coding: [{ system: 'http://terminology.hl7.org/CodeSystem/consentscope', code: 'patient-privacy' }] },
-        category: [{ coding: [{ system: 'http://loinc.org', code: '59284-0' }] }],
-        patient: {
-          reference: `Patient/${patientFhirId}`,
-          display: patientName || 'Patient',
-        },
-        dateTime: consentDateTime,
-        organization: [{ display: 'vDHP Care Compass' }],
-        provision: {
-          type: 'permit',
-          purpose: [{ system: 'http://terminology.hl7.org/CodeSystem/v3-ActReason', code: 'TREAT' }],
-          class: [{ system: 'http://hl7.org/fhir/resource-types', code: 'Observation' }],
-          code: [{ coding: [{ system: 'http://loinc.org', code: '8716-3' }] }],
-        },
-      };
+      // Only create FHIR consent if we have a FHIR ID (optional for local dev)
+      if (patientFhirId) {
+        const fhirConsentPayload = {
+          resourceType: 'Consent',
+          status: 'active',
+          scope: { coding: [{ system: 'http://terminology.hl7.org/CodeSystem/consentscope', code: 'patient-privacy' }] },
+          category: [{ coding: [{ system: 'http://loinc.org', code: '59284-0' }] }],
+          patient: {
+            reference: `Patient/${patientFhirId}`,
+            display: patientName || 'Patient',
+          },
+          dateTime: consentDateTime,
+          organization: [{ display: 'vDHP Care Compass' }],
+          provision: {
+            type: 'permit',
+            purpose: [{ system: 'http://terminology.hl7.org/CodeSystem/v3-ActReason', code: 'TREAT' }],
+            class: [{ system: 'http://hl7.org/fhir/resource-types', code: 'Observation' }],
+            code: [{ coding: [{ system: 'http://loinc.org', code: '8716-3' }] }],
+          },
+        };
 
-      await patientService.createFhirConsent(fhirConsentPayload);
+        await patientService.createFhirConsent(fhirConsentPayload);
+      }
 
       // 4. Navigate to the dashboard on success
       router.replace('/(app)/dashboard');
